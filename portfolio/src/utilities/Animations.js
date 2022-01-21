@@ -3,7 +3,7 @@ export default class Animations {
 
     fadeInScreen = (screen_name) => {
         let screen = document.getElementById(screen_name);
-        if (!screen || screen_name) {
+        if (!screen_name || !screen) {
             return
         }
 

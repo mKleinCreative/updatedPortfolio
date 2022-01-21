@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef} from 'react'
 import './Resume.css'
 import ScreenHeading from '../../utilities/ScreenHeading/ScreenHeading'
 import ScrollService from '../../utilities/ScrollService'
@@ -7,6 +7,13 @@ import Animations from '../../utilities/Animations'
 export default function Resume(props) {
     const [selectedBulletIndex, setSelectedBulletIndex] = useState(0)
     const [carouselOffSetStyle, setCarouselOffSetStyle] = useState({})
+    const EducationRef = useRef();
+    const WorkHistoryRef = useRef();
+    const ProgrammingSkillsRef = useRef();
+    const ProjectsRef = useRef();
+    const InterestsRef = useRef();
+
+
     let fadeInScreenHandler = (screen) => {
         if(screen.fadeInScreen !== props.id) {
             return
@@ -20,31 +27,31 @@ export default function Resume(props) {
             <div className='resume-heading'>
                 <div className='resume-main-heading'>
                     <div className='heading-bullet'></div>
-                    <div className='resume-sub-heading'>
-                        <span>{props.heading ? props.heading : ''}</span>
-                        {props.fromDate && props.toDate ?(
-                            <div className ='heading-date'>
-                                {props.fromDate+ "_" +props.toDate}
-                            </div>
-                        ) : (
-                            <div></div>
-                        )}
-                        <span>{props.subHeading ? props.subHeading : ''}</span>
-                    </div>
-                    <div className='resume-heading-description'>
-                        <span>{props.description ? props.description : ''}</span>
-                    </div>
+                    <span>{props.heading ? props.heading : ''}</span>
+                    {props.fromDate && props.toDate ?(
+                        <div className ='heading-date'>
+                            {props.fromDate+ "-" +props.toDate}
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
+                </div>
+                <div className='resume-sub-heading'>
+                    <span>{props.subHeading ? props.subHeading : ''}</span>
+                </div>
+                <div className='resume-heading-description'>
+                    <span>{props.description ? props.description : ''}</span>
                 </div>
             </div>
         )
     }
 
     const resumeBullets = [
-    { label : "Education", logoSrc: "education.svg"},
-    { label : "Work History", logoSrc: "work-history.svg"},
-    { label : "Programming Skills", logoSrc: "programming-skills.svg"},
-    { label : "Projects", logoSrc: "projects.svg"},
-    { label : "Interests", logoSrc: "interests.svg"},
+        { label : "Education", logoSrc: "education.svg"},
+        { label : "Work History", logoSrc: "work-history.svg"},
+        { label : "Programming Skills", logoSrc: "programming-skills.svg"},
+        { label : "Projects", logoSrc: "projects.svg"},
+        { label : "Interests", logoSrc: "interests.svg"},
     ];
 
     const programmingSkillDetails = [
@@ -84,7 +91,11 @@ export default function Resume(props) {
     ]
 
     const resumeDetails = [
-        <div className='resume-screen-container' key='education'>
+        <div
+            className='resume-screen-container'
+            key='education'
+            ref={EducationRef}
+        >
             <ResumeHeading
                 heading={"Stevens Institute of Technology"}
                 subHeading={"MASTERS OF COMPUTER SCIENCE"}
@@ -98,106 +109,118 @@ export default function Resume(props) {
                 toDate={'2012'}
             />
         </div>,
-        <div className='resume-screen-container' key='work-experience'>
-            <ResumeHeading
-                heading={"Apple via Apex Systems"}
-                subHeading={"Technical Program Manager/Software Engineer"}
-                fromDate={'2019'}
-                toDate={'2021'}
-            />
-            <div className='experience-description'>
-                <span className='resume-description-text'>
-                    - Created a new workflow for QA artists to improve productivity, using Node.js and gathering user stories,
-    resulting in an improvement in project delivery speed by 466%.
-                </span>
-                <br />
-                <span className='resume-description-text'>
-                    - Implemented training program for QA artists and curated guides, using Quip, reducing training time by a factor
-    of ~600% and turning employees from brand new to production ready.
-                </span>
-                <br/>
-                <span className='resume-description-text'>
-                    - Improved quality and speed of our QA artists by designing new tools, using github tickets, eliminating 3rd
-    Party programs and saving Apple $40k+ annually and also scaling the process by 2.5X.
-                </span>
-                <br/>
-                <span className='resume-description-text'>
-                    - Managed a team of QA artists, using Github tickets and Quip, ensuring 15+ engineers delivered on over 60
-    mapped regions worldwide.
-                </span>
-            </div>
-            <ResumeHeading
-                heading={"Reso"}
-                subHeading={"Front End Engineer"}
-                fromDate={'2018'}
-                toDate={'2018'}
-            />
-            <div className='experience-description'>
-                <span className='resume-description-text'>
-                    - Migrated front end to a modern framework working off of microservices and compiled with webpack, using
-    backbone.js, ReactRouter, and Redux, resulting in a reduced load time by a factor of 100X.
-                </span>
-                <br />
-                <span className='resume-description-text'>
-                    - Built a SCSS library to reduce redundancy in code, using SCSS, reducing turnaround time for advertising
-    templates from 1.5 days to an hour or less and reducing redundancy in code by 2.5X.
-                </span>
-                <br/>
-                <span className='resume-description-text'>
-                    - Streamlined UI design, using React, resulting in an increase in user retention by 45% and overall happiness of
-    our users by 80%.
-                </span>
-            </div>
-            <ResumeHeading
-                heading={"Cinch Sports"}
-                subHeading={"Front End Engineer"}
-                fromDate={'2018'}
-                toDate={'2018'}
-            />
-            <div className='experience-description'>
-                <span className='resume-description-text'>
-                    - Architected application to modernize tech stack, using HTML, jQuery, and React.js, resulting in a higher
-    retention rate of new users.
-                </span>
-                <br />
-                <span className='resume-description-text'>
-                    - Migrated old application to a single web application, using HTML, jQuery, and React.js, resulting in an increase
-    in product engagement of 100%.
-                </span>
-            </div>
-            <ResumeHeading
-                heading={"UC Berkeley Web Development Certification Program"}
-                subHeading={"Software Engineer"}
-                fromDate={'2017'}
-                toDate={'2018'}
-            />
-            <div className='experience-description'>
-                <span className='resume-description-text'>
-                    - Led and trained students through week-long project sprints, using MongoDB, Express, React and Node.js,
-    resulting in over 200+ students achieving their certification.
-                </span>
-                <br />
-                <span className='resume-description-text'>
-                    - Went over all studentsʼ projects by debugging their codebases, using MongoDB, Express, React and Node.js,
-    resulting in the creation of ~50 student projects and the removal of 1K+ bugs.
-                </span>
+
+        <div
+            className='resume-screen-container'
+            key='work-experience'
+            ref={WorkHistoryRef}
+        >
+            <div className="experience-container">
+                <ResumeHeading
+                    heading={"Apple via Apex Systems"}
+                    subHeading={"Technical Program Manager/Software Engineer"}
+                    fromDate={'2019'}
+                    toDate={'2021'}
+                />
+                <div className='experience-description'>
+                    <span className='resume-description-text'>
+                        - Created a new workflow for QA artists to improve productivity, using Node.js and gathering user stories,
+        resulting in an improvement in project delivery speed by 466%.
+                    </span>
+                    <br />
+                    <span className='resume-description-text'>
+                        - Implemented training program for QA artists and curated guides, using Quip, reducing training time by a factor
+        of ~600% and turning employees from brand new to production ready.
+                    </span>
+                    <br/>
+                    <span className='resume-description-text'>
+                        - Improved quality and speed of our QA artists by designing new tools, using github tickets, eliminating 3rd
+        Party programs and saving Apple $40k+ annually and also scaling the process by 2.5X.
+                    </span>
+                    <br/>
+                </div>
+                <ResumeHeading
+                    heading={"Reso"}
+                    subHeading={"Front End Engineer"}
+                    fromDate={'2018'}
+                    toDate={'2018'}
+                />
+                <div className='experience-description'>
+                    <span className='resume-description-text'>
+                        - Migrated front end to a modern framework working off of microservices and compiled with webpack, using
+        backbone.js, ReactRouter, and Redux, resulting in a reduced load time by a factor of 100X.
+                    </span>
+                    <br />
+                    <span className='resume-description-text'>
+                        - Built a SCSS library to reduce redundancy in code, using SCSS, reducing turnaround time for advertising
+        templates from 1.5 days to an hour or less and reducing redundancy in code by 2.5X.
+                    </span>
+                    <br/>
+                    <span className='resume-description-text'>
+                        - Streamlined UI design, using React, resulting in an increase in user retention by 45% and overall happiness of
+        our users by 80%.
+                    </span>
+                </div>
+                <ResumeHeading
+                    heading={"Cinch Sports"}
+                    subHeading={"Front End Engineer"}
+                    fromDate={'2018'}
+                    toDate={'2018'}
+                />
+                <div className='experience-description'>
+                    <span className='resume-description-text'>
+                        - Architected application to modernize tech stack, using HTML, jQuery, and React.js, resulting in a higher
+        retention rate of new users.
+                    </span>
+                    <br />
+                    <span className='resume-description-text'>
+                        - Migrated old application to a single web application, using HTML, jQuery, and React.js, resulting in an increase
+        in product engagement of 100%.
+                    </span>
+                </div>
+                <ResumeHeading
+                    heading={"UC Berkeley Web Development Certification Program"}
+                    subHeading={"Software Engineer"}
+                    fromDate={'2017'}
+                    toDate={'2018'}
+                />
+                <div className='experience-description'>
+                    <span className='resume-description-text'>
+                        - Led and trained students through week-long project sprints, using MongoDB, Express, React and Node.js,
+        resulting in over 200+ students achieving their certification.
+                    </span>
+                    <br />
+                    <span className='resume-description-text'>
+                        - Went over all studentsʼ projects by debugging their codebases, using MongoDB, Express, React and Node.js,
+        resulting in the creation of ~50 student projects and the removal of 1K+ bugs.
+                    </span>
+                </div>
             </div>
         </div>,
-        <div className='resume-screen-container programming-skills-container'>
-            {programmingSkillDetails.map((skill, index) => {
+        <div
+            className='resume-screen-container programming-skills-container'
+            key="programming-skills"
+            ref={ProgrammingSkillsRef}
+        >
+            {programmingSkillDetails.map((skill, index) => (
                 <div className='skill-parent' key={index}>
                     <div className='heading-bullet'></div>
                     <span>{skill.skill}</span>
                     <div className='skill-percentage'>
                         <div style={{width: skill.ratingPercentage + '%'}}
-                        className='active-percentage'></div>
+                        className='active-percentage-bar'></div>
                     </div>
                 </div>
-            })}
+            ))}
         </div>,
-        <div className='resume-screen-container' key='projects'>
-            {projectDetails.map((projectDetail, index) => {
-                <ResumeHeading 
+
+        <div
+            className='resume-screen-container'
+            key='projects'
+            ref={ProjectsRef}
+        >
+            {projectDetails.map((projectDetail, index) => (
+                <ResumeHeading
                     key={index}
                     heading={projectDetail.title}
                     subHeading={projectDetail.subHeading}
@@ -205,36 +228,61 @@ export default function Resume(props) {
                     fromDate={projectDetail.duration.fromDate}
                     toDate={projectDetail.duration.toDate}
                 />
-                })}
+                ))}
         </div>,
-        <div className='resume-screen-container' key='interests'>
-            <ResumeHeading 
+
+        <div
+            className='resume-screen-container'
+            key='interests'
+            ref={InterestsRef}
+        >
+            <ResumeHeading
                 heading='3D Arts and Animation'
-                description='From Video Games to Movies I am an appreciator of everything CG based 
-                and am in constant awe of the awesome artists that push themselves to deliver the 
+                description='From Video Games to Movies I am an appreciator of everything CG based
+                and am in constant awe of the awesome artists that push themselves to deliver the
                 superb quality we see these days.'
             />
-            <ResumeHeading 
+            <ResumeHeading
                 heading='Painting'
-                description='Anything including acrylic painting to Warhammer figurines, to just appreciating a good museum, 
-                I am a fan of pushing myself artistically and designing things in a medium 
+                description='Anything including acrylic painting to Warhammer figurines, to just appreciating a good museum,
+                I am a fan of pushing myself artistically and designing things in a medium
                 where the possibilities can seem endless.'
             />
-            <ResumeHeading 
+            <ResumeHeading
                 heading='My Dog'
                 description="Daisy is a Corgi/Pomeranian/Maltese mix and she's adorable."
             />
         </div>
     ]
 
-    
-
     const handleCarousal = (index) => {
-        let offsetHeight = 400;
-        let newCarousalOffset = {
-            style: {transform: "translateY("+ index * offsetHeight * -1 + "px)"}
+        let offsetHeight;
+        if (index === 2) {
+            offsetHeight = ProgrammingSkillsRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        } else if (index === 1) {
+            offsetHeight = WorkHistoryRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        } else if (index === 0) {
+            offsetHeight = EducationRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: "center"
+            });
+        } else if (index === 3) {
+            ProjectsRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        } else {
+            InterestsRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
         }
-        setCarouselOffSetStyle(newCarousalOffset);
         setSelectedBulletIndex(index);
     }
 
@@ -247,8 +295,8 @@ export default function Resume(props) {
                 }
                 key={index}
             >
-                <img 
-                    className='bullet-logo' 
+                <img
+                    className='bullet-logo'
                     src={require(`../../assets/Resume/${bullet.logoSrc}`)}
                     alt='Oops, no internet connection'
                 />
@@ -268,16 +316,21 @@ export default function Resume(props) {
         )
     }
 
+    useEffect(() => {
+        return () => {
+            fadeInSubscription.unsubscribe();
+        };
+    }, [fadeInSubscription])
+
     return (
-        <div className='resume-container screen-container' id={props.id || ""}>
+        <div className='resume-container screen-container fade-in' id={props.id || ""}>
             <div className='resume-content'>
                 <ScreenHeading title={'Resume'} subHeading={"My Formal Bio Details"}/>
                 <div className='resume-card'>
                     <div className='resume-bullets'>
                         <div className='bullet-container'>
-                            <div className='bullet-icons'>
-                                <div className='bullets'>{getBullets()}</div>
-                            </div>
+                            <div className='bullet-icons'></div>
+                            <div className='bullets'>{getBullets()}</div>
                         </div>
                     </div>
                     <div className='resume-bullet-details'>{getResumeScreen()}</div>

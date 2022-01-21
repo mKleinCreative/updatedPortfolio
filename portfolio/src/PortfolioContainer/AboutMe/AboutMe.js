@@ -41,7 +41,7 @@ export default function AboutMe(props) {
     }
 
     return (
-        <div className='about-me-container screen-container' id={props.id || ""}>
+        <div className='about-me-container screen-container fade-in' id={props.id || ""}>
             <div className="about-me-parent">
                 <ScreenHeading title={'About Me'} subHeading={'Why Choose Me?'}/>
                 <div className='about-me-card'>
@@ -55,7 +55,10 @@ export default function AboutMe(props) {
                             {renderHighlights()}
                         </div>
                         <div className='about-me-options'>
-                            <button className="btn primary-btn">
+                            <button 
+                                className="btn primary-btn"
+                                onClick={() => ScrollService.scrollHandler.scrollToHireMe()}
+                            >
                                 {""}
                                 Hire me{" "}
                             </button>

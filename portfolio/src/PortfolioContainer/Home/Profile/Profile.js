@@ -1,6 +1,7 @@
 import React from "react";
 import Typical from 'react-typical'
 import "./Profile.css";
+import ScrollService from "../../../utilities/ScrollService"
 
 export default function Profile() {
   return (
@@ -51,14 +52,16 @@ export default function Profile() {
               />
             </h1>
             <span className="profile-role-tagline">
-              Knack for solving all your application based problems.
+              I have a knack for solving all your web application based problems.
             </span>
           </span>
         </div>
         <div className="profile-options">
-          <button className="btn primary-btn">
-            {""}
-            Hire me{" "}
+          <button 
+            className="btn primary-btn"
+            onClick={() => ScrollService.scrollHandler.scrollToHireMe()}
+          >
+            Hire me
           </button>
           <a
             href="Michael Klein Resume.pdf"

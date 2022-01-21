@@ -6,6 +6,7 @@
     min-height: fit-content;
     margin: 120px 0;
 }
+
 .resume-card {
     display: flex;
     height: 360px;
@@ -21,13 +22,16 @@
     flex-grow: 1;
     width: 600px;
     overflow: scroll;
-    padding: 0 0 0 70px;
+    padding: 0 0 0 80px;
 }
 
 .experience-description {
     margin: 10px 0 0 0;
     text-align: justify;
     max-width: 100%;
+}
+.resume-description-text {
+    font-size: 12px;
 }
 
 .resume-details-carousal {
@@ -84,19 +88,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin: 20px;
+    margin: 100px 0;
     height: 100%;
     width: 100%;
 }
 .resume-heading {   
     display: flex;
     flex-direction: column;
+    font-family: "Poppins SemiBold";
+    margin-top: 20px;
 }
 .resume-main-heading {
     position: relative;
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
 }
 .heading-bullet {
     position: absolute;
@@ -148,4 +153,49 @@
     transition: 0.8s ease;
     position: absolute;
     background-color: #1f2235;
+}
+.skill-parent span {
+    font-family: "Poppins Bold";
+    font-size: 16px;
+    color: #ff5823;
+}
+@media only screen and (max-width: 1110px) {
+    .resume-card {
+        width: 880px;
+    }
+
+    .resume-bullet-details {
+        padding: 0 0 0 70px;
+    }
+}
+@media only screen and (max-width: 1023px) {
+    .resume-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .bullets {
+        width: 90%;
+    }
+    .resume-card {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        margin: 30px 0;
+        align-items: center;
+        width: 90%;
+    }
+    .resume-bullet-details {
+        height: 360px;
+        width: fit-content;
+        padding: 0;
+    }
+    .resume-bullets {
+        width: 100%;
+        margin: 30px 0;
+    }
+    .selected-bullet {
+        width: 100%;
+    }
+
 }
